@@ -24,12 +24,16 @@ public class EnemyManager : MonoBehaviour
     IEnumerator SpawnProcess()
     {
         int remainingCount = spawnCount;        // 남은 생성 수.
+        int enemyIndex = 0;                     // 적의 번호.
+
         while((remainingCount -= 1) >= 0)       // 적 생성 시 남은 수가 0이상일 경우.
         {
             yield return new WaitForSeconds(spawnRate);                 // spawnRate만큼 대기.
             EnemyTile newEnemy = Instantiate(enemyPrefab, transform);   // 적 프리팹 생성. (나의 하위)
-            newEnemy.transform.position = waypoints[0].position;        // 생성 위치는 0번째 웨이 포인트.
 
+            newEnemy.name = string.Concat(newEnemy.name, $"({enemyIndex++})");
+
+            newEnemy.transform.position = waypoints[0].position;        // 생성 위치는 0번째 웨이 포인트.
             newEnemy.SetDestination(waypoints);                         // 적에게 목적지 설정.
         }
     }
