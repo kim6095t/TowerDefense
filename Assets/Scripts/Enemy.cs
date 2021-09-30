@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float hp;
+    [SerializeField] Transform hpBarPivot;
+
+    float maxHP;
+    HpBar hpBar;
+
+    private void Start()
     {
-        
+        maxHP = hp;
+        hpBar = HpBarManager.Instance.ConnectedHpBar(hpBarPivot);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDamaged(float power)
     {
-        
+        if ((hp -= power) <= 0.0f)
+        {
+            OnDead();
+        }
+
+        hpBar.UpdateHp(hp, maxHP);
+    }
+
+    private void OnDead()
+    {
+        Destroy(gameObject);
     }
 }

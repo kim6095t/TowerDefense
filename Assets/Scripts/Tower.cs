@@ -7,18 +7,25 @@ public class Tower : MonoBehaviour
     [Header("Search")]
     [SerializeField] LayerMask searchMask;    
 
-    [Header("Combat")]
-    [SerializeField] GameObject bullet;
+    [Header("Bullet")]
+    [SerializeField] Bullet bullet;
+    [SerializeField] Transform bulletPivot;
+    [SerializeField] float moveSpeed;
+
+    [Header("Combat")]    
     [SerializeField] float attackPower;
     [SerializeField] float attackRate;
     [SerializeField] float attackRadius;
 
-    [Header("Etc")]
-    [SerializeField] Transform towerPivot;
-
+    private Transform pivot;
     private Enemy target = null;
     private float nextAttackTime = 0.0f;
-    
+
+    private void Start()
+    {
+        pivot = transform;        
+    }
+
     void Update()
     {
         if (target == null)
@@ -52,14 +59,27 @@ public class Tower : MonoBehaviour
             target = null;
             return;
         }
-                                
-        
+
+        Vector3 direction = target.transform.position - pivot.position;     // (회전) 오일러 방향
+        direction.Normalize();                                              // 0.0 ~ 1.0f 사이 값으로 정규화.
+        Quaternion lookAt = Quaternion.LookRotation(direction);             // (회전) 오일러 -> 쿼터니언
+        //pivot.rotation = lookAt;
+
+        // Lerp : 현재 -> 목적지 값까지 시간의 경과에 따른 사이 값을 준다.
+        // Smooth rotation.
+        pivot.rotation = Quaternion.Lerp(pivot.rotation, lookAt, 10f * Time.deltaTime);
+
+        //transform.position = new Vector3(100, 100, 100);
+        //transform.rotation = Quaternion.Euler(90, 90, 90);                // 오일러 -> 쿼터니언.
 
         // 타워의 공격.
         if (nextAttackTime <= Time.time)
         {
             nextAttackTime = Time.time + attackRate;
-            Debug.Log($"Attack To : {target.name}");
+            Bullet newBullet = Instantiate(bullet);
+            newBullet.transform.position = bulletPivot.position;
+            newBullet.transform.rotation = bulletPivot.rotation;
+            newBullet.Shoot(target, moveSpeed, attackPower);
         }
     }
 
