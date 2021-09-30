@@ -52,18 +52,8 @@ public class Tower : MonoBehaviour
             target = null;
             return;
         }
-
-        //Quaternion targetRotation = Quaternion.LookRotation(target.transform.position, towerPivot.position); 
-
-        // 타워의 회전.
-        //towerPivot.rotation = Quaternion.Lerp(targetRotation, towerPivot.rotation, 10f * Time.deltaTime);
-
-        float dX = target.transform.position.x - towerPivot.position.x;
-        float dZ = target.transform.position.z - towerPivot.position.z;
-
-        float degree = Mathf.Atan2(dX, dZ) * Mathf.Rad2Deg;
-        towerPivot.rotation = Quaternion.Euler(0, -degree, 0);
-
+                                
+        
 
         // 타워의 공격.
         if (nextAttackTime <= Time.time)
