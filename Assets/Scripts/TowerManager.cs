@@ -29,8 +29,11 @@ public class TowerManager : MonoBehaviour
         if (setTile == null || setTile.IsSetTower)
             return;
 
-        Tower newTower = Instantiate(towerPrefab, transform);
-        setTile.Set(newTower);
+        if (GameManager.Instance.OnUseGold(10))
+        {
+            Tower newTower = Instantiate(towerPrefab, transform);
+            setTile.Set(newTower);
+        }
     }
 
 }

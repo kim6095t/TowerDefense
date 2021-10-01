@@ -9,16 +9,18 @@ public class GameInfoUI : MonoBehaviour
     public static GameInfoUI Instance => instance;
 
     [SerializeField] Text hpText;
+    [SerializeField] Text goldText;
+    [SerializeField] Text waveText;
 
     private void Awake()
     {
-
         instance = this;
     }
-    
-    public void OnUpdateHp(int hp)
+
+    private void Update()
     {
-        hpText.text = hp.ToString();
+        hpText.text = GameManager.Instance.HP.ToString();
+        goldText.text = GameManager.Instance.Gold.ToString();
+        waveText.text = string.Format("Wave {0}", GameManager.Instance.Wave);
     }
-   
 }

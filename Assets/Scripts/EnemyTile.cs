@@ -39,6 +39,7 @@ public class EnemyTile : MonoBehaviour
     }
     void OnGoal()
     {
+        GameManager.Instance.OnDamagedToHp();
         Destroy(gameObject);
     }
 }

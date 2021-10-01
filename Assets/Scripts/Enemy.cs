@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float hp;
+    [SerializeField] float maxHP;
     [SerializeField] Transform hpBarPivot;
 
-    float maxHP;
+    float hp;
     HpBar hpBar;
 
     private void Start()
     {
-        maxHP = hp;
+        // юс╫ц
+        float addHp = (GameManager.Instance.Wave - 1) * 10;
+
+        maxHP += addHp;
+        hp = maxHP;
+
         hpBar = HpBarManager.Instance.ConnectedHpBar(hpBarPivot);
     }
 
@@ -28,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDead()
     {
+        GameManager.Instance.OnGetGold(2);
         Destroy(gameObject);
     }
 }

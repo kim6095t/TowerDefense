@@ -15,13 +15,17 @@ public class HpBar : MonoBehaviour
         this.target = target;
         mainCam = Camera.main;
     }
+
+    float currentFill;
     public void UpdateHp(float current, float max)
     {
-        hpBarImage.fillAmount = current / max;
+        currentFill = current / max;
     }
 
-
-
+    private void Start()
+    {
+        currentFill = 1f;
+    }
     void Update()
     {
         if (target == null)
@@ -33,5 +37,7 @@ public class HpBar : MonoBehaviour
         // (¿ùµå)targetÀÇ ÁÂÇ¥ -> (½ºÅ©¸°)Hp Ui ÁÂÇ¥.
         Vector3 screenPosition = mainCam.WorldToScreenPoint(target.position);
         transform.position = screenPosition;
+
+        hpBarImage.fillAmount = Mathf.Lerp(hpBarImage.fillAmount, currentFill, 5f * Time.deltaTime);
     }
 }
