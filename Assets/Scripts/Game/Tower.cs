@@ -15,7 +15,7 @@ public abstract class Tower : MonoBehaviour
 
 
     protected Enemy target = null;
-    protected float nextAttackTime = 0.0f;
+    
 
     void Update()
     {
