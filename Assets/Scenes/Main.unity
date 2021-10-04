@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02851f77213af014d8b20c4239723dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 8475093389928148741, guid: 0577cbcda21f440459fe65b44c709382, type: 3}
+  towerPrefab: {fileID: -1022571970227976155, guid: a1f7b2cf898f0294fa6f3afc8c606ba2, type: 3}
   tileMask:
     serializedVersion: 2
     m_Bits: 64

@@ -124,19 +124,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2136083203804996555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81fe4613da09a3f4fbf642ab73054f0d, type: 3}
+  m_Script: {fileID: 11500000, guid: aba830be46110c14aa3a296077380e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 5418591451558418386}
   searchMask:
     serializedVersion: 2
     m_Bits: 128
-  bullet: {fileID: 8777097123958387780, guid: 1556e8891017f86458ccab569f8246d8, type: 3}
+  attackPower: 30
+  attackRate: 3
+  attackRadius: 5
+  bullet: {fileID: 1717211568433706796, guid: 1556e8891017f86458ccab569f8246d8, type: 3}
   bulletPivot: {fileID: 847833564920711986}
   moveSpeed: 20
-  attackPower: 30
-  attackRate: 1.5
-  attackRadius: 4
 --- !u!1 &3281562197571187810
 GameObject:
   m_ObjectHideFlags: 0

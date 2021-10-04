@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         Quaternion lookAt = Quaternion.LookRotation(direction);
 
         pivot.position = Vector3.MoveTowards(pivot.position, target.transform.position, moveSpeed * Time.deltaTime);
-        pivot.rotation = Quaternion.Lerp(pivot.rotation, lookAt, 10f * Time.deltaTime);
+        pivot.rotation = Quaternion.Lerp(pivot.rotation, lookAt, 100f * Time.deltaTime);
 
         // 타겟과 나의 거리가 (많이) 가까워 졌다면.
         if (Vector3.Distance(pivot.position, target.transform.position) <= float.Epsilon)
