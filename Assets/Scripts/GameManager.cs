@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         nextPhaseTime += Time.time + phaseWaitTime;
         phase = PHASE.Ready;
                 
-        Gold = 30;
+        Gold = 200;
         HP = maxHP;
     }
     private void Update()

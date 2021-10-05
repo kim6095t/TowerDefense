@@ -4,6 +4,23 @@ using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
 {
+    public enum TOWER_TYPE
+    {
+        None = -1,
+        Standard,
+        Missile,
+        Laser,
+    }
+
+    [Header("Info")]
+    [SerializeField] TOWER_TYPE type;
+    [SerializeField] Sprite sprite;
+    [SerializeField] int price;
+
+    public TOWER_TYPE Type => type;
+    public Sprite towerSprite => sprite;
+    public int Price => price;
+
     [Header("Search")]
     [SerializeField] protected Transform pivot;
     [SerializeField] protected LayerMask searchMask;    

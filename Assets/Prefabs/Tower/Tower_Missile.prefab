@@ -127,6 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba830be46110c14aa3a296077380e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
+  sprite: {fileID: 21300000, guid: 062a907dac085d34d98fe88fca7d6366, type: 3}
+  price: 300
   pivot: {fileID: 5418591451558418386}
   searchMask:
     serializedVersion: 2

@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e4852412d752247947c6c927cee42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 50
+  maxHP: 10
   hpBarPivot: {fileID: 7297304653590278521}
 --- !u!135 &3859577026076951578
 SphereCollider:

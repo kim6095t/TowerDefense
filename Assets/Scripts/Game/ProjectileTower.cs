@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ProjectileTower : Tower
 {
-    [SerializeField] protected float attackRadius;
-
     [Header("Bullet")]
     [SerializeField] Bullet bullet;
     [SerializeField] Transform bulletPivot;
