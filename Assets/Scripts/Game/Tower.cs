@@ -4,32 +4,41 @@ using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
 {
+    public static string KEY_NAME     = "Name";
+    public static string KEY_TYPE     = "Type";
+    public static string KEY_POWER    = "Power";
+    public static string KEY_ATKSPD   = "AttackRate";
+    public static string KEY_ATKRANGE = "AttackRadius";
+    public static string KEY_PRICE    = "Price";
+
     public enum TOWER_TYPE
     {
         None = -1,
+
         Standard,
         Missile,
-        Laser,
+        Raser,
+
+        Count,
     }
 
     [Header("Info")]
     [SerializeField] TOWER_TYPE type;
     [SerializeField] Sprite sprite;
-    [SerializeField] int price;
+
+    [Header("Search")]
+    [SerializeField] protected Transform pivot;
+    [SerializeField] protected LayerMask searchMask;
 
     public TOWER_TYPE Type => type;
     public Sprite towerSprite => sprite;
     public int Price => price;
 
-    [Header("Search")]
-    [SerializeField] protected Transform pivot;
-    [SerializeField] protected LayerMask searchMask;    
+    private int price;
 
-    [Header("Combat")]    
-    [SerializeField] protected float attackPower;
-    [SerializeField] protected float attackRate;
-    [SerializeField] protected float attackRadius;
-
+    protected float attackPower;
+    protected float attackRate;
+    protected float attackRadius;
 
     protected Enemy target = null;
     
@@ -70,6 +79,15 @@ public abstract class Tower : MonoBehaviour
         }
     }
     protected abstract void AttackEnemy();
+
+    public void Setup(TowerData data)
+    {
+        attackPower = float.Parse(data.GetData(KEY_POWER));
+        attackRate = float.Parse(data.GetData(KEY_ATKSPD));
+        attackRadius = float.Parse(data.GetData(KEY_ATKRANGE));
+
+        price = int.Parse(data.GetData(KEY_PRICE));
+    }
 
 
 #if UNITY_EDITOR

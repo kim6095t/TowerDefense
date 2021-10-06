@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Tower;
 
 public class TowerButtonManager : MonoBehaviour
 {
     [SerializeField] TowerButton buttonPrefab;
-    public void Setup(Tower[] towers, TowerButton.DlSelectedTower buttonEvent)
+
+    private void Start()
     {
-        foreach(Tower tower in towers)
+        for(TOWER_TYPE type = 0; type < TOWER_TYPE.Count; type++)
         {
+            TowerData towerData = TowerManager.Instance.GetData(type);
             TowerButton newButton = Instantiate(buttonPrefab, transform);
-            newButton.Setup(tower, buttonEvent);
+
+            newButton.Setup(towerData);
         }
     }
 }

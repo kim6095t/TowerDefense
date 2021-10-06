@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] EnemyManager enemyManager; // 적 생성 매니저.
     [SerializeField] float phaseWaitTime;       // 다음 페이즈까지 기다리는 시간.
     [SerializeField] int maxHP;
+    [SerializeField] int startGold;             // 시작 골드.
     
     public int HP { get; private set; }
     public int Gold { get; private set; }
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
         nextPhaseTime += Time.time + phaseWaitTime;
         phase = PHASE.Ready;
                 
-        Gold = 200;
+        Gold = startGold;
         HP = maxHP;
     }
     private void Update()

@@ -10,15 +10,17 @@ public class TowerButton : MonoBehaviour
     [SerializeField] Image towerImage;
     [SerializeField] Text priceText;
 
-    Tower linkedTower;
+    Tower.TOWER_TYPE type;
 
-    public void Setup(Tower tower, DlSelectedTower buttonEvent)
+    public void Setup(TowerData towerData)
     {
-        linkedTower = tower;
+        // 데이터를 받아와 열거형으로 파싱.
+        type = (Tower.TOWER_TYPE)System.Enum.Parse(typeof(Tower.TOWER_TYPE), towerData.GetData(Tower.KEY_TYPE));
 
-        towerImage.sprite = tower.towerSprite;
-        priceText.text = tower.Price.ToString("#,##0");
-        
-        GetComponent<Button>().onClick.AddListener(() => buttonEvent(linkedTower.Type));
+        // towerImage.sprite = tower.towerSprite;
+        priceText.text = string.Format("{0:#,##0}", towerData.GetData(Tower.KEY_PRICE));
+
+        // 버튼에 이벤트 등록.
+        GetComponent<Button>().onClick.AddListener(() => TowerManager.Instance.OnSelectedTower(type));
     }
 }

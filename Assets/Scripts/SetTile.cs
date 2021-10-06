@@ -6,7 +6,6 @@ public class SetTile : MonoBehaviour
 {
     [SerializeField] Tower setTower;      // 내 위에 설치된 타워.
     public bool IsSetTower => setTower != null;
-
     public void Set(Tower newTower)
     {
         if(IsSetTower)

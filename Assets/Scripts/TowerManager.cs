@@ -1,57 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Tower;     // Tower 클래스의 영역을 포함하겠다.
+
+public class TowerData
+{
+    private Dictionary<string, string> data;
+
+    public TowerData(Dictionary<string, string> data)
+    {
+        this.data = data;
+    }
+
+    public string GetData(string key)
+    {
+        return data[key];
+    }
+}
 
 public class TowerManager : MonoBehaviour
 {
-    public struct TowerData
+    // 싱글톤 (SingleTon)
+    static TowerManager instance;
+    public static TowerManager Instance => instance;
+
+    [SerializeField] TextAsset          data;
+    [SerializeField] Tower[]            towerPrefabs;
+    [SerializeField] LayerMask          tileMask;
+
+    Dictionary<TOWER_TYPE, TowerData> towerDatas;           // 가공된 타워 데이터.
+    TOWER_TYPE selectedType = TOWER_TYPE.None;              // 현재 선택한 타워의 타입.
+
+    private void Awake()
     {
-        public string name;
-        public Tower.TOWER_TYPE type;
-        public float power;
-        public float attackRate;
-        public float attackRadius;
-        public string bulletName;
-        public float bulletSpeed;
-        public float chargeTime;
-    }
+        instance = this;
 
-    [SerializeField] TextAsset data;
-    [SerializeField] TowerData towerDatas;
-
-    private void Start()
-    {
-        Dictionary<string, string>[] towerDatas = CSVReader.ReadCSV(data);
-
-        for (int i = 0; i < towerDatas.Length; i++)
+        // CSV데이터를 우리가 원하는 데이터로 가공.
+        towerDatas = new Dictionary<TOWER_TYPE, TowerData>();
+        Dictionary<string, string>[] csvDatas = CSVReader.ReadCSV(data);
+        for (int i = 0; i < csvDatas.Length; i++)
         {
-            Dictionary<string, string> tower = towerDatas[i];
+            TowerData newData = new TowerData(csvDatas[i]);
+            TOWER_TYPE type = (TOWER_TYPE)System.Enum.Parse(typeof(TOWER_TYPE), newData.GetData(KEY_TYPE));
 
-            Debug.Log($"{i}번째 타워의 타입은 : {tower["Type"]}");
-            Debug.Log($"{i}번째 타워의 파워는 : {tower["Power"]}");
+            towerDatas.Add(type, newData);
         }
-
-        buttonManager.Setup(towerPrefabs, OnSelectedTower);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    [SerializeField] TowerButtonManager buttonManager;
-    [SerializeField] Tower[] towerPrefabs;
-    [SerializeField] LayerMask tileMask;
-
-    Tower.TOWER_TYPE selectedType = Tower.TOWER_TYPE.None;
-
-    
 
     private void Update()
     {
@@ -69,6 +63,11 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public TowerData GetData(TOWER_TYPE type)
+    {
+        return towerDatas[type];
+    }
+
     private void CreateTower(SetTile setTile)
     {
         // 선택한 타일이 없거나 타일에 이미 설치가 되어있는 경우.
@@ -80,12 +79,13 @@ public class TowerManager : MonoBehaviour
         if (GameManager.Instance.OnUseGold(needGold))           // 골드 소비 시도.
         {
             Tower newTower = Instantiate(towerPrefabs[(int)selectedType], transform);
+            newTower.Setup(towerDatas[newTower.Type]);
+            
             setTile.Set(newTower);
-
             selectedType = Tower.TOWER_TYPE.None;
         }
     }
-    private void OnSelectedTower(Tower.TOWER_TYPE type)
+    public void OnSelectedTower(Tower.TOWER_TYPE type)
     {
         Debug.Log($"Selected : {type}");
         selectedType = type;

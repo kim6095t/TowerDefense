@@ -354,13 +354,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104706194}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.7304628, y: 10.428802, z: -2.347}
+  m_LocalRotation: {x: 0.58507466, y: -0, z: -0, w: 0.8109795}
+  m_LocalPosition: {x: -0.7304628, y: 8.89, z: -5.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 71.617, y: 0, z: 0}
 --- !u!4 &106172031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5437146578888584666, guid: 5ccc834994ac8c246a020e966f04fdb2, type: 3}
@@ -674,7 +674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 4900000, guid: 44f5b4e43ca07b7408de77c91f7c4432, type: 3}
-  buttonManager: {fileID: 1309054668}
   towerPrefabs:
   - {fileID: 7293529043308981585, guid: 8dc344335c9268545a318fb8b3cb7b65, type: 3}
   - {fileID: 8475093389928148741, guid: 0577cbcda21f440459fe65b44c709382, type: 3}
@@ -2619,6 +2618,7 @@ MonoBehaviour:
   enemyManager: {fileID: 1102670910}
   phaseWaitTime: 1
   maxHP: 5
+  startGold: 2000
 --- !u!4 &875993082
 Transform:
   m_ObjectHideFlags: 0

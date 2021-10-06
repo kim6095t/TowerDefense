@@ -22,8 +22,10 @@ public class CSVReader : MonoBehaviour
             string[] datas = dataColumns[index].Split(',');       // index번째 데이터 줄을 개별 데이터로 자른다.
             result.Add(new Dictionary<string, string>());         // 값을 담을 딕셔너리 객체 생성.
 
-            for (int row = 0; row< datas.Length; row++)
+            for (int row = 0; row < datas.Length; row++)
+            {
                 result[index].Add(keys[row], datas[row]);         // row(열)번째 키 값과 데이터 값을 대입.
+            }
         }
 
         return result.ToArray();

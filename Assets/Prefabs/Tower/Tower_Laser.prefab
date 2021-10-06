@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452215276412205270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.748, z: 0.675}
+  m_LocalPosition: {x: 0, y: 0.5380186, z: 0.675}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8930496041701206955}
@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2627066186533414995}
   m_LocalRotation: {x: -0.49991274, y: 0.50008726, z: 0.49991274, w: 0.50008726}
-  m_LocalPosition: {x: 0, y: 0.5589814, z: 0}
+  m_LocalPosition: {x: 0, y: 0.349, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8930496041701206955}
@@ -161,16 +161,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   sprite: {fileID: 21300000, guid: 44fc54e1abc570948a11b857d3706a4c, type: 3}
-  price: 500
   pivot: {fileID: 8930496041701206955}
   searchMask:
     serializedVersion: 2
     m_Bits: 128
-  attackPower: 1
-  attackRate: 0.15
-  attackRadius: 6
   beamPivot: {fileID: 4920459946138569194}
-  chargingTime: 2
+  beamRadius: 0.1
+  chargingTime: 1
 --- !u!120 &4759977841734752869
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -325,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7338454953871131013}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0.19810158, z: 0}
+  m_LocalPosition: {x: 0, y: -0.011879832, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.6370336}
   m_Children: []
   m_Father: {fileID: 3371907161834155518}

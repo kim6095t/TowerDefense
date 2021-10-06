@@ -6,6 +6,7 @@ using UnityEngine;
 public class EmissionTower : Tower
 {
     [SerializeField] Transform beamPivot;       // 광선이 나오는 지점.
+    [SerializeField] float beamRadius;          // 광선의 반지름.
     [SerializeField] float chargingTime;        // 에너지를 모우는 시간.
 
     LineRenderer line;
@@ -16,6 +17,8 @@ public class EmissionTower : Tower
     private void Start()
     {
         line = GetComponent<LineRenderer>();
+        line.startWidth = beamRadius * 2f;
+        line.endWidth = beamRadius * 2f;
     }
 
     protected override void OnUpdate()
@@ -32,22 +35,50 @@ public class EmissionTower : Tower
                 {
                     // 빔 발사.
                     isLock = true;
-                    CreateBeam();
+                    StartCoroutine(BeamProcess());
                 }                                                
             }
         }
-        else
-        {
+    }
 
+    private IEnumerator BeamProcess()
+    {
+        Vector3 start = beamPivot.position;
+        Vector3 end = beamPivot.position + (pivot.forward * attackRadius);
+
+        line.positionCount = 2;
+        line.SetPosition(0, start);
+        line.SetPosition(1, end);
+
+        float continueTime = 3.0f;
+        float nextAttackTime = 0.0f;
+
+        while((continueTime -= Time.deltaTime) > 0.0f)
+        {
+            if(nextAttackTime <= Time.time)
+            {
+                nextAttackTime = Time.time + attackRate;
+                Attack();
+            }
+
+            yield return null;
+        }
+
+        line.positionCount = 0;
+        isLock = false;
+    }
+
+    private void Attack()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(beamPivot.position, beamRadius, pivot.forward, attackRadius, searchMask);
+        foreach(RaycastHit hit in hits)
+        {
+            IDamaged target = hit.collider.GetComponent<IDamaged>();
+            if (target != null)
+                target.OnDamaged(attackPower);
         }
     }
 
-    private void CreateBeam()
-    {
-        line.positionCount = 2;
-        line.SetPosition(0, beamPivot.position);
-        line.SetPosition(1, beamPivot.position + (pivot.forward * attackRadius));
-    }      
 
     protected override void AttackEnemy()
     {
